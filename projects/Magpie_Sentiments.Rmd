@@ -2,6 +2,7 @@
 title: 'Sentiments with Peach Pit'
 author: "Jeneta Nwosu"
 date: 05/16/2025
+date-modified: last-modified
 image: magpie_album_bandcamp.jpeg
 description: A class project trying sentiment dictionaries on lyrics of the album "Magpie" by Peach Pit.
 output: html_document
@@ -165,7 +166,7 @@ I conclude that text analysis using dictionaries like these is a fun tool for a 
 See the full final table below.
 
 | Document | NRC Sentiment | Harvard Sentiment |
-|--------------|---------------------------------------------|--------------|
+|----------------|-----------------------------------------|----------------|
 | Every Little Thing | positive (8), trust (7), joy (6), negative (5), sadness (5), anticipation (4), fear (3), disgust (1) | positive |
 | Yasmina | negative (6), anger (4), joy (4), positive (4), trust (4), anticipation (1), disgust (1), fear (1), sadness (1) | negative |
 | Am I Your Girl | negative (2), sadness (2), trust (2), disgust (1) | negative |
