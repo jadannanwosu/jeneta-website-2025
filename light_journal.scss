@@ -1,0 +1,12 @@
+/*-- scss:defaults --*/
+
+$navbar-brand-font-size: 1.25rem !default;
+
+/*-- scss:rules --*/
+.navbar-brand {
+  padding-top: .5rem;
+  font-size: $navbar-brand-font-size;
+  font-weight: $headings-font-weight;
+  text-transform: uppercase;
+}
+

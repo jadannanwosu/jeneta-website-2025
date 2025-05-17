@@ -1,0 +1,26 @@
+/*-- scss:defaults --*/
+$blue:    #369 !default;
+$gray-900: #495057 !default;
+$white: #f8f9fa !default;
+$headings-font-family:   "News Cycle", "Arial Narrow Bold", sans-serif !default;
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$navbar-brand-font-size: 1.25rem !default;
+$headings-font-weight:    700 !default;
+
+/*-- scss:rules --*/
+body {
+    background-color: #222;
+  }
+
+.navbar {
+    font-family: $headings-font-family;
+    font-size: 18px;
+    font-weight: $headings-font-weight;
+  }
+
+  .btn {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+  }
+
+ 

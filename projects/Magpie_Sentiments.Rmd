@@ -1,0 +1,179 @@
+---
+title: 'Sentiments with Peach Pit'
+author: "Jeneta Nwosu"
+date: 05/16/2025
+image: magpie_album_bandcamp.jpeg
+description: A class project trying sentiment dictionaries on lyrics of the album "Magpie" by Peach Pit.
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tm)
+```
+
+# Question
+
+"Magpie" by Peach Pit was my favorite album of the year in 2024. Peach Pit is known for having creative (maybe even zany?) lyricism, and I'm curious if the meaning behind what they write is parsable by a machine. Below, I predict what sentiments will be identified and then see if the results line up with my expectations.
+
+As an example of the problem, the first track "Every Little Thing" sounds upbeat and tender. But when I looked up what it meant, I learned it's written from the Devil's perspective. Spooky! On a second read, the malevolence and sinister themes of temptation become clear.
+
+# Data
+
+The lyrics were scraped from [**Genius**](https://genius.com/albums/Peach-pit/Magpie) using their API and the `lyricsgenius` python package. I replaced the "right single quote character" with a normal apostrophe before importing because it was breaking the cleaning process.
+
+# Prediction
+
+```{r}
+# What sentiments are possible?
+nrc_sentiments <- tidytext::get_sentiments("nrc")
+nrc_sentiments %>%
+  select(sentiment) %>%
+  unique()
+library(SentimentAnalysis)
+harvard_iv <- SentimentAnalysis::DictionaryGI
+names(harvard_iv)
+```
+
+While the Harvard IV dictionary assigns its words to either negative or positive sentiment, the NRC dictionary contains 10 possible emotions. The Harvard IV options will help simplify the meaning of the document, and the NRC will help capture nuances. My predictions below are mostly about the literal meaning of the lyrics, not the figurative.
+
+| Document                 | NRC Sentiment              | Harvard Sentiment |
+|--------------------------|----------------------------|-------------------|
+| Every Little Thing       | anticipation, trust        | positive          |
+| Yasmina                  | positive, joy              | positive          |
+| Am I Your Girl           | negative                   | negative          |
+| Little Dive              | joy, positive\*            | positive          |
+| Outta Here               | fear, anger, negative      | negative          |
+| Did You Love Somebody    | negative, anger, fear      | negative          |
+| St. Mark's Funny Feeling | negative, sadness          | negative          |
+| Magpie                   | negative                   | negative          |
+| Nowhere Next To Me       | disgust, sadness, negative | negative          |
+| Wax & Wane               | negative, disgust          | negative          |
+| Your Long Black Hair     | negative, anticipation     | negative          |
+
+\*Song is about doing drugs, but the words are positive
+
+# Descriptive
+
+```{r}
+# Read in with track numbers to preserve the order for later
+magpie_album_order <- read_csv('magpie.csv', col_select = "number":"song.lyrics")
+
+magpie <- magpie_album_order[1:nrow(magpie_album_order),2:3]
+# Getting rid of punctuation that isn't within the text for the word cloud. Ex. "me," becomes "me", but "I'll" doesn't become "ill"
+lyrics_no_punct <- tm::removePunctuation(magpie$song.lyrics,preserve_intra_word_contractions = T, preserve_intra_word_dashes = T)
+docs <- tm::Corpus(tm::VectorSource(lyrics_no_punct))
+
+dtm <- tm::DocumentTermMatrix(docs,
+                              control = list(stopwords = TRUE,
+                                             tolower = TRUE))
+
+
+freq <- colSums(as.matrix(dtm))
+
+library(wordcloud)
+set.seed(169)
+wordcloud::wordcloud(names(freq), freq, max.words = 100)
+
+```
+
+# NRC
+
+```{r}
+# Turning words into tokens but keeping as many words as possible, as there's only 10 songs
+magpie <- magpie %>%
+  tidytext::unnest_tokens(word, song.lyrics) 
+
+
+# Joining NRC dictionary with Magpie words
+
+nrc_words <- magpie %>%
+  dplyr::inner_join(nrc_sentiments)
+
+# Summarizing sentiment
+magpie_counts <- nrc_words %>%
+  dplyr::group_by(song.full_title, sentiment) %>%
+  dplyr::count()
+
+mag_sent_nrc <- magpie_counts %>%
+  ungroup() %>%
+  arrange(song.full_title, -n) %>%
+  mutate(sentiment_nrc = paste(sentiment,paste0("(", n , ")"))) %>%
+  group_by(song.full_title) %>%
+  summarize(sentiment_nrc = toString(sentiment_nrc)) %>%
+  ungroup()
+
+mag_sent_nrc
+
+```
+
+# Harvard IV
+
+```{r}
+# Turning dictionary into dataframe
+harvard_iv <- sapply(harvard_iv, '[', 1:2005)
+harvard_iv <-data.frame(harvard_iv)
+harvard_sentiments <- harvard_iv %>%
+  pivot_longer(colnames(harvard_iv), values_to = 'word',names_to = 'sentiment',)
+
+# Joining Harvard dictionary with Magpie words
+harvard_words <- magpie %>%
+  dplyr::inner_join(harvard_sentiments)
+
+# Summarizing sentiment
+magpie_counts_2 <- harvard_words %>%
+  dplyr::group_by(song.full_title, sentiment) %>%
+  dplyr::count()
+
+mag_sent_harv <- magpie_counts_2 %>%
+  ungroup() %>%
+  mutate(sentiment_harv = sentiment) %>%
+  select(-sentiment) %>%
+  group_by(song.full_title) %>%
+  filter(n == max(n)) %>%
+  ungroup() %>%
+  mutate(sentiment_harv = ifelse(song.full_title == "Magpie", "negative and positive", sentiment_harv)) %>%
+  unique()
+
+mag_sent_harv
+
+# ^^The song "Magpie" is equally positive and negative
+
+```
+
+# Final Results
+
+```{r}
+# Sentiments from both dictionaries in original order
+mag_sent <- mag_sent_nrc %>%
+  left_join(mag_sent_harv[1:nrow(magpie_counts_2),c(1,3)], by = 'song.full_title') %>%
+  right_join(magpie_album_order[1:nrow(magpie_album_order), 1:2]) %>%
+  arrange(number)
+mag_sent
+
+```
+
+# Discussion
+
+NRC picked up on a broader range of sentiments per song than I expected. I only made a few predictions per song, and many ended up being correct, but not complete. I also failed to predict the number of songs that ended up with positive themes; the same was true for the Harvard IV results. I think on that front, the NRC assignments are better than the Harvard ones. "Wax and Wane" is in no way a positive song.
+
+However, I think the results of both dictionaries benefit from lucky/surface level guesses. For example, in "Little Dive" the NRC dictionary identifies "dandy" with "disgust" and "negative" presumably referring to the pejorative term for a fashionable man, instead of the sense it is actually used in the song, which is a positive feeling. For some reason, "train" gets a positive identification by the Harvard IV dictionary in Your Long Black Hair when I would argue it's by default neutral word (and in context, negative — "I been thinking up a one-night train from this world"). While there's a valid argument for considering the song as positive, that's not it.
+
+I conclude that text analysis using dictionaries like these is a fun tool for a cursory investigation of themes in song lyrics, but especially for complex works like "Magpie" it's probably best to use a more advanced tool like the human brain. And if you must use a dictionary, NRC performs better!
+
+See the full final table below.
+
+| Document | NRC Sentiment | Harvard Sentiment |
+|--------------|---------------------------------------------|--------------|
+| Every Little Thing | positive (8), trust (7), joy (6), negative (5), sadness (5), anticipation (4), fear (3), disgust (1) | positive |
+| Yasmina | negative (6), anger (4), joy (4), positive (4), trust (4), anticipation (1), disgust (1), fear (1), sadness (1) | negative |
+| Am I Your Girl | negative (2), sadness (2), trust (2), disgust (1) | negative |
+| Little Dive | negative (15), positive (14), anticipation (8), fear (7), sadness (7), surprise (7), trust (7), disgust (5), anger (4) | positive |
+| Outta Here | negative (14), anticipation (11), positive (10), disgust (9), anger (8), fear (6), sadness (6), surprise (5), joy (4), trust (3) | positive |
+| Did You Love Somebody | negative (9), anger (6), fear (6), joy (6), positive (6), sadness (4), disgust (2), anticipation (1), trust (1) | negative |
+| St. Mark's Funny Feeling | negative (14), anticipation (9), disgust (9), sadness (9), fear (8), anger (7), positive (7), trust (7), joy (5), surprise (5) | positive |
+| Magpie | negative (9), positive (7), joy (5), sadness (3), surprise (3), anger (2), anticipation (2), disgust (2), trust (2) | negative and positive |
+| Nowhere Next To Me | negative (12), sadness (9), anger (8), disgust (8), fear (8), joy (7), positive (7), trust (4), anticipation (3), surprise (3) | positive |
+| Wax & Wane | negative (3), positive (3), sadness (3), surprise (3), trust (3), anticipation (2), joy (2), fear (1) | positive |
+| Your Long Black Hair | anticipation (11), negative (9), sadness (8), fear (5), disgust (4), anger (3), joy (2), positive (2), surprise (2), trust (2) | positive |

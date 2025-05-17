@@ -1,0 +1,18 @@
+---
+title: "Projects"
+template-partials: title-block.html
+listing:
+  type: grid
+  contents:
+    - "/projects/*.qmd"
+    - "/projects/*.Rmd"
+    - path: https://anchorlink.vanderbilt.edu/organization/lever
+      image: lever_logo_3_centered.png
+      title: Leveraging Emerging Voices in Economics Research
+      description: Vanderbilt student organization, founded by me
+    - path: https://hpbagpipe.com/8680/features/special-coverage/the-history-of-race-in-dallas/
+      image: https://hpbagpipe.com/wp-content/uploads/2021/02/IMG_7314-1-900x600.jpg
+      title: "Dallas' Black History"
+      description: Link to my high school newspaper website
+  sort: false
+---

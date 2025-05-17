@@ -1,11 +1,49 @@
 ---
-title: ""
+title: "Jeneta Nwosu"
+template-partials: title-block.html
+about:
+  template: trestles
+  image: pfp.png
+  links:
+    - icon: bluesky
+      text: Bluesky {{< iconify fa6-brands:square-bluesky >}}
+      href: https://bsky.app/profile/jadannanwosu.bsky.social
+    - icon: github
+      text: Github
+      href: https://github.com/jadannanwosu
+echo: false
 ---
 
-This is a Quarto website.
+**Welcome to my website!**
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I am a third-year undergraduate economics student at Vanderbilt University with minors in math and data science.
 
-```{r}
-1 + 1
+Here, I post my personal and professional accomplishments and interests.
+
+Want to contact me? Use the form below *(will take you to Formspree site when submitted)*
+
+
+```{=html}
+
+
+<form
+  action="https://formspree.io/f/mzbndeqz"
+  method="POST"
+>
+  <label>
+    Your email:  <br>
+    <input type="email" name="email">
+  </label>
+  <br>
+  <label>
+    Your message:  <br>
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <br>
+  <button type="submit">Send</button>
+</form>
+
 ```
+
+

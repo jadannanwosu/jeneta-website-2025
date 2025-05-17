@@ -1,9 +1,46 @@
 ---
-title: "About"
+title: "About me"
+template-partials: title-block.html
+image: pixil-self-portrait-HQ.png
+about:
+  template: solana
 ---
 
-About this site
+Hi! Thanks for stopping by.
 
-```{r}
-1 + 1
-```
+### Bio
+
+Currently, I'm a student at Vanderbilt with ambitions of pursuing postgraduate work and study in economics. I have worked as an undergraduate research assistant at Vanderbilt's Research on Conflict and Collective Action (ROCCA) Lab.
+
+I hope to focus on the mechanisms of social status, racialization, connectedness, and geography within economies — especially where opportunities exist to work with historical data.
+
+In my free time, I like to write for campus publications, play geography and word games, and chip away at my latest library loan.
+
+### Skills
+
+-   Programming: R, Python
+
+    I can perform data cleaning, advanced manipulation of data frames, and implement statistical models.
+
+-   Writing
+
+    Though I have ample experience with technical and academic writing, my background in journalism allows me to tailor my voice for general audiences as well.
+
+-   Mathematics
+
+    My coursework has covered the basic calculus sequence, plus differential equations and linear algebra. I am in the process of completing a math minor, so more classes are to come!
+
+-   Economics and Econometrics
+  
+    I have taken econometrics, intermediate micro and macro, and an independent study course. My independent study focused on comparing the approach of different authors to measuring economic resilience, culminating in a metaregression of resilience on different shocks. 
+  
+    I am pursuing the honors track for my economics major and plan to write a thesis.
+  
+
+-   Effortless Charm
+
+      Self explanatory. {{< iconify twemoji:winking-face >}}
+      
+### Reach out!
+
+Want to hire me, collaborate with me, or chastise me for the quality of my code? Use the form on the home page.

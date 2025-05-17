@@ -1,19 +1,44 @@
 project:
   type: website
+  
+date-modified: last-modified
 
 website:
-  title: "jadannanwosu.github.io"
+  favicon: face_icon-0.png
+  title: "J. Adanna Nwosu"
+
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: projects.qmd
+        text: Projects
+      - href: about.qmd
+        text: About Me
+  page-footer:
+    left:
+      Last updated on {{< meta date-modified>}}
+    center: >-
+      Website built with <a href="https://www.r-project.org/" target="_blank">{{< iconify fa-brands:r-project>}}</a> and <a href="https://quarto.org/" target="_blank">{{< iconify simple-icons:quarto >}}</a>
+      <br>Source available at <a href="https://github.com/jadannanwosu/jeneta-website-2025" target="_blank">{{< iconify fa6-brands github title='GitHub' >}}</a></br>
+
+
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light:
+        - journal
+        - light_journal.scss
+      dark: 
+        - solar
+        - dark_journal.scss
     css: styles.css
     toc: true
+    respect-user-color-scheme: true
+    
+
+ 
 
 editor: visual
 
