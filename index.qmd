@@ -11,6 +11,9 @@ about:
     - icon: github
       text: Github
       href: https://github.com/jadannanwosu
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/jeneta-nwosu-76300426b
 echo: false
 ---
 
