@@ -1,0 +1,2 @@
+this folder is intended for use with a github action that allows publishing
+however, I have disabled the action. this site is rendered using the docs directory.
