@@ -27,6 +27,7 @@ website:
 
 format:
   html:
+    respect-user-color-scheme: true
     theme: 
       light:
         - journal
@@ -36,7 +37,7 @@ format:
         - dark_journal.scss
     css: styles.css
     toc: true
-    respect-user-color-scheme: true
+    
     
 
  
