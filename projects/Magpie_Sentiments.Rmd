@@ -4,7 +4,7 @@ author: "Jeneta Nwosu"
 date: 05/16/2025
 date-modified: last-modified
 image: magpie_album_bandcamp.jpeg
-description: A class project trying sentiment dictionaries on lyrics of the album "Magpie" by Peach Pit.
+description: A class project in R trying sentiment dictionaries on lyrics of the album "Magpie" by Peach Pit.
 output: html_document
 ---
 
