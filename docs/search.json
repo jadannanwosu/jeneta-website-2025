@@ -11,7 +11,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Sentiments with Peach Pit\n\n\nA class project in R trying sentiment dictionaries on lyrics of the album “Magpie” by Peach Pit.\n\n\n\nJeneta Nwosu\n\n\nMay 16, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeveraging Emerging Voices in Economics Research\n\n\nVanderbilt student organization, founded by me\n\n\n\n\n\n\n\n\n\n\n\n\nDallas’ Black History\n\n\nLink to my high school newspaper website\n\n\n\n\n\nNo matching items"
+    "text": "Mutually Inclusive\n\n\nA draft paper that is the culmination of my efforts during the 2026 AEA Summer Training Program.\n\n\n\n\n\n\nJul 29, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSentiments with Peach Pit\n\n\nA class project in R trying sentiment dictionaries on lyrics of the album “Magpie” by Peach Pit.\n\n\n\nJeneta Nwosu\n\n\nMay 16, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeveraging Emerging Voices in Economics Research\n\n\nVanderbilt student organization, founded by me\n\n\n\n\n\n\n\n\n\n\n\n\nDallas’ Black History\n\n\nLink to my high school newspaper website\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/Magpie_Sentiments.html",
@@ -26,5 +26,12 @@
     "title": "Jeneta Nwosu",
     "section": "",
     "text": "Welcome to my website!\nI am a fourth-year undergraduate economics student at Vanderbilt University with minors in math and data science.\nHere, I post my personal and professional accomplishments and interests.\nWant to contact me? Use the form below (will take you to Formspree site when submitted)\n\n  \n    Your email:  \n    \n  \n  \n  \n    Your message:  \n    \n  \n  \n  \n  Send"
+  },
+  {
+    "objectID": "projects/mutually_inclusive.html",
+    "href": "projects/mutually_inclusive.html",
+    "title": "Mutually Inclusive",
+    "section": "",
+    "text": "Download PDF file.\nFind the code for the analysis on my GitHub here. This repo is a work-in-progress and will eventually have clearer step-by-step explanations."
   }
 ]
