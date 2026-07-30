@@ -1,0 +1,14 @@
+---
+title: "Mutually Inclusive"
+subtitle: "Black Fraternal Orders, Mutual Aid, and Occupational Outcomes in Virginia, 1870-1930"
+description: A draft paper that is the culmination of my efforts during the 2026 AEA Summer Training Program.
+date: 07/29/2026
+date-modified: last-modified
+format: html
+resources:
+  - Mutually_Inclusive_Draft.pdf
+---
+
+{{< pdf myfile.pdf width=100% height=400 >}}
+
+Find the code for the analysis on my GitHub here: https://github.com/jadannanwosu/mutually-inclusive. This repo is a work-in-progress and will eventually have clearer step-by-step explanations.
