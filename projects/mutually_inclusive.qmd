@@ -10,7 +10,10 @@ resources:
   - Mutually_Inclusive_Draft.pdf
 ---
 
-{{< pdf Mutually_Inclusive_Draft.pdf width=100% height=1200 >}}
-
 Find the code for the analysis on my GitHub [here](https://github.com/jadannanwosu/mutually-inclusive). 
 This repo is a work-in-progress and will eventually have clearer step-by-step explanations.
+
+{{< pdf Mutually_Inclusive_Draft.pdf width=100% height=1200 >}}
+
+[Download PDF](Mutually_Inclusive_Draft.pdf){.btn .btn-primary .btn-sm role="button"}
+
